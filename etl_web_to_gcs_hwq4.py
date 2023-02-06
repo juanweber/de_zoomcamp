@@ -2,6 +2,8 @@ import pandas as pd
 from pathlib import Path
 from prefect import task, flow
 from prefect_gcp.cloud_storage import GcsBucket
+#from prefect.filesystems import GitHub
+#github_block = GitHub.load("github-flow-hw")
 
 
 @task(retries=3)
@@ -20,8 +22,8 @@ def clean(df=pd.DataFrame) -> pd.DataFrame:
     Fix dtype issues.
     """
     #print(df.columns)
-    df["tpep_pickup_datetime"] = pd.to_datetime(df["tpep_pickup_datetime"])
-    df["tpep_dropoff_datetime"] = pd.to_datetime(df["tpep_dropoff_datetime"])
+    df["lpep_pickup_datetime"] = pd.to_datetime(df["lpep_pickup_datetime"])
+    df["lpep_dropoff_datetime"] = pd.to_datetime(df["lpep_dropoff_datetime"])
 
     print(f"### NUMBER OF ROWS: {len(df)}")
     return df
